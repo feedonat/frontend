@@ -1,0 +1,141 @@
+<div class="page-content">
+		<div class="container">
+			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+		
+			<!-- /.modal -->
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<!-- BEGIN PAGE BREADCRUMB -->
+			<ul class="page-breadcrumb breadcrumb">
+				<li>
+					<a href="#">Home</a><i class="fa fa-circle"></i>
+				</li>
+				<li>
+					<a href="form_controls.html">UI Components</a>
+					<i class="fa fa-circle"></i>
+				</li>
+				<li class="active">
+					 Bootstrap<br>
+					Form Controls
+				</li>
+			</ul>
+			<!-- END PAGE BREADCRUMB -->
+			<!-- BEGIN PAGE CONTENT INNER -->
+			
+			<div class="row">
+			<div class="col-md-12">
+				<!-- BEGIN TODO SIDEBAR -->
+				<div class="todo-sidebar">
+					<div class="portlet light">
+						<div class="portlet-title">
+							<div class="caption" data-toggle="collapse" data-target=".todo-project-list-content">
+								<i class="fa fa-gear"></i>
+								<span class="caption-subject font-green-sharp bold uppercase">Actions </span>
+								<span class="caption-helper visible-sm-inline-block visible-xs-inline-block">click to view project list</span>
+							</div>
+
+
+						</div>
+						<div class="portlet-body todo-project-list-content">
+							<div class="todo-project-list">
+								<ul class="nav nav-pills nav-stacked">
+									<li>
+										<a href="javascript:;"><i class="fa  fa-angle-double-right"></i> Add </a>
+									</li>
+									<li>
+										<a href="javascript:;"> HSBC Promo </a>
+									</li>
+									<li class="active">
+										<a href="javascript:;"> GlobalEx System </a>
+									</li>
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END TODO SIDEBAR -->
+				<!-- BEGIN TODO CONTENT -->
+				<div class="todo-content">
+					<div class="portlet light">
+						<!-- PROJECT HEAD -->
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="icon-bar-chart font-green-sharp hide"></i>
+								<span class="caption-subject font-green-sharp bold uppercase">School Profile</span>
+							</div>
+
+
+						</div>
+						<!-- end PROJECT HEAD -->
+						<div class="portlet-body">
+							<div class="row">
+								<form #f ="ngForm" class="form-horizontal"  (ngSubmit)="createSchool(f)" >
+									<div class="form-group">
+										<label for="name" class="col-md-2 control-label">School Name </label>
+										<div class="col-md-4">
+											<div class="input-icon">
+												<i class="fa fa-envelope"></i>
+												<input [(ngModel)]="profile.schoolName" type="text" class="form-control" id="name" name="schoolName" placeholder="school name" #schoolName="ngModel">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="address" class="col-md-2 control-label">Address</label>
+										<div class="col-md-4">
+											<div class="input-icon left">
+												<i class="fa fa-user"></i>
+												<input [(ngModel)]="profile.address"  name="address"  type="text" class="form-control" id="address" placeholder="address" #address="ngModel">
+											</div>
+
+										</div></div>
+
+										<div class="form-group">
+											<label for="inputEmail12" class="col-md-2 control-label">Email</label>
+											<div class="col-md-4">
+												<div class="input-icon">
+													<i class="fa fa-envelope"></i>
+													<input [(ngModel)]="profile.email" name="email" type="email" class="form-control" id="inputEmail12" placeholder="Email" #email="ngModel">
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="phone" class="col-md-2 control-label">Phone Number</label>
+											<div class="col-md-4">
+												<div class="input-icon left">
+													<i class="fa fa-phone"></i>
+													<input [(ngModel)]="profile.phone" name="phone" type="text" class="form-control" id="phone" placeholder="phone no" #phone="ngModel">
+												</div>
+
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label for="mobile" class="col-md-2 control-label">Mobile</label>
+											<div class="col-md-4">
+												<div class="input-icon left">
+													<i class="fa fa-mobile"></i>
+													<input [(ngModel)]="profile.mobile" name="mobile" type="text" class="form-control" id="mobile" placeholder="mobile" #mobile="ngModel">
+												</div>
+
+											</div>
+										</div>
+										<hr>
+										<div class="form-group">
+											<div class="col-md-offset-2 col-md-10">
+												<button type="submit" class="btn green">Sign in</button>
+											</div>
+										</div>
+								</form>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END TODO CONTENT -->
+				</div>
+			</div>
+			<!-- END PAGE CONTENT INNER -->
+		</div>
+	</div>
+	<!-- END PAGE CONTENT -->

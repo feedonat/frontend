@@ -1,0 +1,137 @@
+<div id="table-container" *ngIf="items.length > 0; else noRows">
+
+    <div class="table-controls">
+        <div class="table-results">
+            <div *ngIf="!tableOptions['noShowNumResults']">
+                <p *ngIf="numPerPage != 1/0; else allResults" id="numResultsTop">Number of results: {{items.length}}</p>
+                <ng-template id="numResultsTop" #allResults>
+                    <p> Showing all {{ items.length }} results</p>
+                </ng-template>
+            </div>
+        </div>
+
+
+        <div *ngIf="!tableOptions['noPagination']" class="table-pagination">
+            <input type="image" src="../../../assets/images/ic_begin_arrows_black_12px.svg" class="paginate-button" id="paginateFirst"
+                (click)="page(0)" alt="First">
+            <input type="image" src="../../../assets/images/ic_back_arrow_black_12px.svg" class="paginate-button" id="paginateBack" (click)="page(pageNum-1)"
+                alt="Back">
+            <!-- tedious logic ahead, approach with caution -->
+            <span *ngFor="let item of items; let i = index">
+                <button *ngIf="((i)%numPerPage === 0 && ((((i)/numPerPage)-pageNum)==4 || (((i)/numPerPage)-pageNum)==-4)) && (i/numPerPage)!=1 && (i/numPerPage)!=((items.length-(items.length%numPerPage))/numPerPage)" [attr.label]="'Page ' + ((i/numPerPage)+1)" class="paginate-button"
+                    id="pg{{(i/numPerPage)+1}}" [ngClass]="{'active': (i)/numPerPage === pageNum }" [attr.label]="'Page ' + ((i/numPerPage)+1)" (click)="page(i/numPerPage)">..</button>
+                <button *ngIf="(i)%numPerPage === 0 && (((i)/numPerPage)-pageNum)<4 && (((i)/numPerPage)-pageNum)>-4 " class="paginate-button" id="pg{{(i/numPerPage)+1}}" [ngClass]="{'active': (i)/numPerPage === pageNum }" [attr.label]="'Page ' + ((i/numPerPage)+1)"
+                    (click)="page(i/numPerPage)">{{(i/numPerPage)+1}}</button>
+            </span>
+            <input type="image" src="../../../assets/images/ic_forward_arrow_black_12px.svg" class="paginate-button" id="paginateForward"
+                (click)="page(pageNum+1)" alt="Forward">
+            <input type="image" src="../../../assets/images/ic_end_arrows_black_12px.svg" class="paginate-button" id="paginateLast" (click)="page(1/0)"
+                alt="Last">
+        </div>
+
+        <div class="table-entries">
+            <div *ngIf="!tableOptions['noNumPerPage']">
+                <label for="page-size1">Page Size</label>
+                <select id="page-size1" [(ngModel)]="numPerPage" (change)="page(pageNum)">
+                    <option *ngFor="let number of numPerPageOptions" [ngValue]="(number=='All')?(1/0):number">{{number}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-scrollable">
+    <table class="table table-striped table-bordered table-hover">
+        <thead bgcolor="#eceff1">
+            <tr>
+                <th *ngFor="let col of cols; let i = index" id="{{col.id}}" class="sort end-column">
+                    <div *ngIf="col.selectBox; else standardCol">
+                        <input type="checkbox" class="styled-checkbox" name='colcheckbox' (change)="onClickColCheckMark($event)" />
+                    </div>
+                    <ng-template #standardCol>
+                        <div *ngIf="col.number" class="rightAlign">
+                            {{col.name}}<input type="image" *ngIf="col.sort == undefined || col.sort == true" [alt]="'Sort ' + col.name"
+                                [attr.label]="'Sort ' + col.name" (click)="sortCol($event)" id="{{col.id}}" class="sort" [src]="sort==col.id?(asc?'../../../assets/images/ic_sort_arrows_ascend_black_12px.svg':'../../../assets/images/ic_sort_arrows_descend_black_12px.svg'):'../../../assets/images/ic_sort_arrows_black_12px.svg'">
+                        </div>
+                        <div *ngIf="col.number" class="rightAlign">
+                            {{col.name}}<input type="image" *ngIf="col.sort == undefined || col.sort == true" [alt]="'Sort ' + col.name"
+                                [attr.label]="'Sort ' + col.name" (click)="sortCol($event)" id="{{col.id}}" class="sort" [src]="sort==col.id?(asc?'../../../assets/images/ic_sort_arrows_ascend_black_12px.svg':'../../../assets/images/ic_sort_arrows_descend_black_12px.svg'):'../../../assets/images/ic_sort_arrows_black_12px.svg'">
+                        </div>
+                        <div *ngIf="col.currency" class="rightAlign">
+                            {{col.name}}<input type="image" *ngIf="col.sort == undefined || col.sort == true" [alt]="'Sort ' + col.name"
+                                [attr.label]="'Sort ' + col.name" (click)="sortCol($event)" id="{{col.id}}" class="sort" [src]="sort==col.id?(asc?'../../../assets/images/ic_sort_arrows_ascend_black_12px.svg':'../../../assets/images/ic_sort_arrows_descend_black_12px.svg'):'../../../assets/images/ic_sort_arrows_black_12px.svg'">
+                        </div>
+                        <div *ngIf="!col.number && !col.currency">
+                            {{col.name}}<input type="image" *ngIf="col.sort == undefined || col.sort == true" [alt]="'Sort ' + col.name"
+                                [attr.label]="'Sort ' + col.name" (click)="sortCol($event)" id="{{col.id}}" class="sort" [src]="sort==col.id?(asc?'../../../assets/images/ic_sort_arrows_ascend_black_12px.svg':'../../../assets/images/ic_sort_arrows_descend_black_12px.svg'):'../../../assets/images/ic_sort_arrows_black_12px.svg'">
+                        </div>
+                    </ng-template>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items | orderBy | slice:pageNum*numPerPage:(pageNum+1)*numPerPage; let i = index" class="odd gradeX">
+                <td *ngFor="let col of cols; let j = index" id="{{col.id+items.indexOf(item)}}" class="end-column">
+                    <div *ngIf="col.selectBox">
+                        <input type="checkbox" name='rowcheckbox' [(ngModel)]="item.selected" [value]="items.indexOf(item)" [id]="'checkBox'+items.indexOf(item)"
+                            class="" />
+                    </div>
+                    <div *ngIf="col.currency" class="rightAlign">
+                        {{ item[col.id] | currency:'USD':true:'1.2-2' }}
+                    </div>
+                    <div *ngIf="col.number" class="rightAlign">
+                        {{ item[col.id]}}
+                    </div>
+                    <div *ngIf="col.button">
+                        <button class="btn btn-warning" type="button" id="{{items.indexOf(item)}}" (click)="item[col.id+'Event']($event)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                    </div>
+                    <div *ngIf="col.image && item[col.id]">
+                        <img  src="data:image/jpeg;base64,{{item[col.id]}}"/>
+                    </div>
+                    <div *ngIf="!col.selectBox && !col.button && !col.currency && !col.number && !col.image" [ngClass]="{'rightAlign': !!item[col.id+'Link']}">
+                        <a *ngIf="!!item[col.id+'Link']; else standardText" id="{{items.indexOf(item)}}" href="{{item[col.id+'Link']}}">{{ item[col.id] }}</a>
+                        <ng-template #standardText>{{ item[col.id] }}</ng-template>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+</div>
+<div class="table-controls">
+    <div class="table-results">
+        <div *ngIf="!tableOptions['noShowNumResults']">
+            <p id="numResultsBottom" *ngIf="numPerPage != 1/0; else allResults">Number of Results: {{items.length}}</p>
+            <ng-template id="numResultsBottom" #allResults> Showing all {{ items.length }} results</ng-template>
+        </div>
+    </div>
+    <div *ngIf="!tableOptions['noPagination']" class="table-pagination">
+        <input type="image" src="../../../assets/images/ic_begin_arrows_black_12px.svg" class="paginate-button" id="paginateFirst"
+            (click)="page(0)" alt="First">
+        <input type="image" src="../../../assets/images/ic_back_arrow_black_12px.svg" class="paginate-button" id="paginateBack" (click)="page(pageNum-1)"
+            alt="Back">
+        <!-- tedious logic ahead, approach with caution -->
+        <span *ngFor="let item of items; let i = index">
+            <button *ngIf="((i)%numPerPage === 0 && ((((i)/numPerPage)-pageNum)==4 || (((i)/numPerPage)-pageNum)==-4)) && (i/numPerPage)!=1 && (i/numPerPage)!=((items.length-(items.length%numPerPage))/numPerPage)" [attr.label]="'Page ' + ((i/numPerPage)+1)" class="paginate-button"
+                id="pg{{(i/numPerPage)+1}}" [ngClass]="{'active': (i)/numPerPage === pageNum }" [attr.label]="'Page ' + ((i/numPerPage)+1)" (click)="page(i/numPerPage)">..</button>
+            <button *ngIf="(i)%numPerPage === 0 && (((i)/numPerPage)-pageNum)<4 && (((i)/numPerPage)-pageNum)>-4 " class="paginate-button" id="pg{{(i/numPerPage)+1}}" [ngClass]="{'active': (i)/numPerPage === pageNum }" [attr.label]="'Page ' + ((i/numPerPage)+1)"
+                (click)="page(i/numPerPage)">{{(i/numPerPage)+1}}</button>
+        </span>
+        <input type="image" src="../../../assets/images/ic_forward_arrow_black_12px.svg" class="paginate-button" id="paginateForward"
+            (click)="page(pageNum+1)" alt="Forward">
+        <input type="image" src="../../../assets/images/ic_end_arrows_black_12px.svg" class="paginate-button" id="paginateLast" (click)="page(1/0)"
+            alt="Last">
+    </div>
+    <div class="table-entries">
+        <div *ngIf="!tableOptions['noNumPerPage']">
+            <label for="page-size2">Page Size</label>
+            <select id="page-size2" [(ngModel)]="numPerPage" (change)="page(pageNum)">
+                <option *ngFor="let number of numPerPageOptions" [ngValue]="(number=='All')?(1/0):number">{{number}}</option>
+            </select>
+        </div>
+    </div>
+</div>
+<ng-template #noRows>
+    <div class="alert-inline info">
+        <h3><img src="/assets/images/ic_info_blue_24px.svg" alt="No claim data available." class="icon">No data available.</h3>
+    </div>
+</ng-template>

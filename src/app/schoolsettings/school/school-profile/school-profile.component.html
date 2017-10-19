@@ -1,0 +1,128 @@
+<div class="page-content">
+	<div class="container">
+		<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+		<!-- /.modal -->
+		<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+		<!-- BEGIN PAGE BREADCRUMB -->
+		<ul class="page-breadcrumb breadcrumb">
+			<li>
+				<a href="#">Home</a><i class="fa fa-circle"></i>
+			</li>
+			<li>
+				<a href="form_controls.html">UI Components</a>
+				<i class="fa fa-circle"></i>
+			</li>
+			<li class="active">
+				Bootstrap<br> Form Controls
+			</li>
+		</ul>
+		<!-- END PAGE BREADCRUMB -->
+		<!-- BEGIN PAGE CONTENT INNER -->
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="todo-content">
+					<div class="portlet light">
+						<!-- PROJECT HEAD -->
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="icon-bar-chart font-green-sharp hide"></i>
+								<span class="caption-subject font-green-sharp bold uppercase">School Profile</span>
+							</div>
+
+
+						</div>
+						<!-- end PROJECT HEAD -->
+						<div class="portlet-body">
+							<div class="row">
+								<div class="col-md-9">
+									<form #f="ngForm" class="form-horizontal" (ngSubmit)="createSchool(f.value)" outcomplete="off" novalidate>
+										<div class="form-group">
+											<em class="fa" *ngIf="f.controls.schoolName?.invalid && (f.controls.schoolName?.touched || mouseoverSave)">School Name is required</em>
+											<label for="name" class="col-md-2 control-label">School Name </label>
+											<div class="col-md-6">
+												<div class="input-icon">
+													<input (ngModel)="schoolName" type="text" class="form-control" id="name" name="schoolName" required>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<em *ngIf="f.controls.address?.invalid && (f.controls.address?.touched || mouseoverSave)">Address is required</em>
+											<label for="address" class="col-md-2 control-label">Address</label>
+											<div class="col-md-6">
+
+
+												<input (ngModel)="address" name="address" type="text" class="form-control" id="address" required>
+
+
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label for="email" class="col-md-2 control-label">Email</label>
+											<em *ngIf="f.controls.email?.invalid && (f.controls.email?.touched || mouseoverSave)">email is required</em>
+
+											<div class="col-md-6">
+
+
+												<input (ngModel)="email" name="email" type="email" class="form-control" id="email" required>
+
+											</div>
+										</div>
+										<div class="form-group">
+											<em *ngIf="f.controls.phone?.invalid && (f.controls.phone?.touched || mouseoverSave)">phone is required</em>
+											<label for="phone" class="col-md-2 control-label">Phone Number</label>
+											<div class="col-md-6">
+
+
+												<input (ngModel)="phone" name="phone" type="text" class="form-control" id="phone" required>
+
+
+											</div>
+										</div>
+
+										<div class="form-group">
+											<em *ngIf="f.controls.mobile?.invalid && (f.controls.mobile?.touched || mouseoverSave)">Mobile is required</em>
+											<label for="mobile" class="col-md-2 control-label">Mobile</label>
+											<div class="col-md-6">
+
+
+												<input (ngModel)="mobile" name="mobile" type="text" class="form-control" id="mobile" required>
+
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="mobile" class="col-md-2 control-label">Upload Logo </label>
+											<div class="col-md-6">
+											<input type="file" name="student_img" required (change)="fileChange(input)" #input />
+											</div>
+										</div>
+
+										<hr>
+										<div class="form-group">
+											<div class="col-md-offset-2 col-md-10">
+											<span (mouseenter)="mouseoverSave = true" (mouseleave)="mouseoverSave=false">
+											<button type="submit" [disabled]="f.invalid" class="btn green">Save</button>					   
+											</span>
+												<button type="button" (click)="onCancel()" class="btn btn-info">cancel</button>
+											</div>
+
+										</div>
+									</form>
+								</div>
+								<div class="col-md-3">
+									<img [attr.src]='file_srcs[0]' alt="" />
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END TODO CONTENT -->
+			</div>
+		</div>
+		<!-- END PAGE CONTENT INNER -->
+	</div>
+</div>
+<!-- END PAGE CONTENT -->

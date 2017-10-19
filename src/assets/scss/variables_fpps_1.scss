@@ -1,0 +1,77 @@
+// FPPS Variables Set 1 v. 0.1
+// Colors
+$color-primary: #003F72; // Navy Blue
+$color-info: #0073A7; // Blue
+$color-success: #4D7C18; // Green
+$color-caution: #FFCA00; // Yellow
+$color-warning: #C44C05; // Orange
+$color-danger: #AA2027; // Red
+// Grays
+$gray-base: #808080;
+$gray-dark: darken($gray-base, 18%); // #555
+$gray-darker: darken($gray-base, 30%); // #333
+$gray-darkest: darken($gray-base, 100%); // #000
+$gray-light: lighten($gray-base, 25%); // #999
+$gray-lighter: lighten($gray-base, 35%); // #CCC
+$gray-lightest: lighten($gray-base, 44%); // #EFEFEF
+// Font family
+$typeface: 'Roboto',
+'Lucida Sans Unicode',
+'Lucida Grande',
+'Lucida Sans',
+'Calibri',
+'Arial',
+'san-serif';
+// Element Structure
+// Corner Radius
+$radius-base: 4px;
+$radius-sm: 2px;
+$radius-md: 4px;
+$radius-lg: 8px;
+$radius-xl: 12px;
+// Padding
+$padding-base: 10px 16px;
+$padding-xs: 2px 4px;
+$padding-sm: 6px 8px;
+$padding-md: 10px 16px;
+$padding-lg: 18px 24px;
+$padding-xl: 26px 32px;
+$padding-table: 8px 10px;
+$padding-table-tight: 8px;
+// Shadows
+$shadow-base: 0 3px 6px rgba(0, 0, 0, 0.2);
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+$shadow-md: 0 3px 6px rgba(0, 0, 0, 0.2);
+// General Dropdowns
+$dropdown-bg: #FFF;
+// Tooltips
+$tooltip-bg: $gray-dark;
+$tooltip-text: #FFF;
+// Typography
+// Sizes
+$font-size-base: 13px;
+$font-size-xs: ceil(($font-size-base * 0.92)); // ~12px
+$font-size-sm: $font-size-base; // 13px
+$font-size-md: floor(($font-size-base * 1.25)); // ~16px
+$font-size-lg: floor(($font-size-base * 1.40)); // ~18px
+$font-size-xl: floor(($font-size-base * 1.85)); // ~24px
+// H tags
+$h1-size: ceil(($font-size-base * 2.75)); // ~36px
+$h2-size: floor(($font-size-base * 1.85)); // ~24px
+$h3-size: floor(($font-size-base * 1.55)); // ~20px
+$h4-size: floor(($font-size-base * 1.4)); // ~18px
+$h5-size: $font-size-base;
+$h6-size: ceil(($font-size-base * .92)); // ~12px
+// Line height
+$line-height-base: 1.25;
+$line-height-xs: 1.1;
+$line-height-sm: $line-height-base;
+$line-height-md: 1.5;
+$line-height-lg: 1.75;
+$line-height-xl: 2;
+// Buttons
+$btn-font-weight: 700;
+$btn-padding-base: 9px 20px 11px;
+$btn-padding-xs: 3px 8px 5px;
+$btn-padding-sm: 7px 12px 9px;
+$btn-padding-md: $btn-padding-base;
