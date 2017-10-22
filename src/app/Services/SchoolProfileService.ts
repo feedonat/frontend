@@ -15,9 +15,14 @@ import "rxjs/add/operator/catch";
 import { SchoolProfile } from '../Models/Models';
 
 @Injectable()
-export class SchoolProfileService {
-  constructor(private http: Http) { }
+export class SchoolProfileService  {
 
+  schools:any[];
+  constructor(private http: Http) { 
+
+   this.loadschools();
+  }
+ 
   //create new school 
   createSchool(school) {
     console.log("the school Data sent is "+JSON.stringify(school));
@@ -35,9 +40,17 @@ getSchools() : Observable<SchoolProfile[]> { {
     let options = new RequestOptions({ headers: headers });
     return this.http.get('http://localhost:8080/api/school/all').map((res: Response) => res.json())
     .catch((error:Response)=>Observable.throw(error.json));
-    
+  
     
   }
 }
 
+ loadschools(){
+  this.getSchools().subscribe(schools => this.schools = schools,
+    error => {
+      Observable.throw(error);
+    });
+  console.log("inside service constracor"+ this.schools)
 }
+}
+export var schoolsData = this.schools;

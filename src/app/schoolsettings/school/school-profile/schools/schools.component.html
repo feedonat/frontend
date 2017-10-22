@@ -1,81 +1,73 @@
-<div class="page-content">
-    <div class="container">
-        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
-        <!-- /.modal -->
-        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-        <!-- BEGIN PAGE BREADCRUMB -->
-        <ul class="page-breadcrumb breadcrumb">
-            <li>
-                <a href="#">Home</a><i class="fa fa-circle"></i>
-            </li>
-            <li>
-                <a href="form_controls.html">UI Components</a>
-                <i class="fa fa-circle"></i>
-            </li>
-            <li class="active">
-                Bootstrap<br> Form Controls
-            </li>
-        </ul>
 
-        <div class="row">
-            <div class="col-md-12">
-                <!-- BEGIN EXAMPLE TABLE PORTLET-->
-                <div class="portlet light">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="fa fa-cogs font-green-sharp"></i>
-                            <span class="caption-subject font-green-sharp bold uppercase">School List</span>
-                        </div>
-                        <div class="tools">
-                            <a href="javascript:;" class="collapse">
-								</a>
-                            <a href="#portlet-config" data-toggle="modal" class="config">
-								</a>
-                            <a href="javascript:;" class="reload">
-								</a>
-                            <a href="javascript:;" class="remove">
-								</a>
-                        </div>
-                    </div>
-                    <div class="portlet-body">
-                        <div class="table-toolbar">
-                            <div class="row">
-                                <div class="col-md-6">
-                                   
-                                    <!-- <div class="btn-group">
-                                        we will put some searching staff here
+                        <div style="margin: auto; max-width: 1000px; margin-top:50px">
+                            <data-table id="school-grid"
+                               
+                                [items]="schoolsData"
+                                [itemCount]="schoolCount"
+                                (reload)="reloadFilms($event)"
+                        
+                                [limit]="schoolsData.length"
+                                [sortBy]="'rating'"
+                                [sortAsc]="false"
+                                [selectColumn]="true"
+                                [multiSelect]="true"
+                                [indexColumn]="false"
+                                [translations]="translations"
+                                
+                                >
+                                <data-table-column
+                                    [property]="'id'"
+                                    [header]="'ID'"
+                                    [sortable]="true">
+                                </data-table-column>
+                                <data-table-column
+                                    [property]="'schoolName'"
+                                    [header]="'School Name'"
+                                    [sortable]="true">
+                                </data-table-column>
+                                <data-table-column
+                                    [property]="'address'"
+                                    [header]="'Address'"
+                                    [sortable]="true"
+                                    [cellColors]="cellColor">
+                                </data-table-column>
+                                <data-table-column
+                                    [property]="'email'"
+                                    [header]="'Email'">
+                                </data-table-column>
 
-                                        <a href="" [routerLink]="['add']" id="sample_editable_1_new" class="btn green">
-											Add New <i class="fa fa-plus"></i>
-											</a>
-                                    </div> -->
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="btn-group pull-right">
-                                        <button class="btn green dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
-											</button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li>                                   
-											<a href="" [routerLink]="['add']">
-													<i class="fa fa-plus"> ADD NEW</i> </a>
-                                            </li>
-                                            <li>
-                                                <a href="" [routerLink]="['add']">
-													<i class="fa fa-print"> PRINT</i> </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-													Export to Excel</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                <data-table-column
+                                [property]="'phone'"
+                                [header]="'Phone#'">
+                            </data-table-column>
+
+                            <data-table-column
+                            [property]="'mobile'"
+                            [header]="'Mobile#'">
+                        </data-table-column>
+                        <data-table-column
+                        [property]="'logo'"
+                        [header]="'Logo'">
+                    </data-table-column>
+
+                                <data-table-column
+                                header="Actions">
+                                <template #dataTableHeader let-item="item">
+                                  <i>Actions</i>
+                                </template>
+                                <template #dataTableCell let-item="item">
+                                  <button (click)="schoolClicked(item)" class="btn btn-sm btn-default">Buy</button>
+                                </template>
+                              </data-table-column>
+     
+                            </data-table>
+                            <div style="margin-top: 10px">
+                                <b>Selected:</b>
+                                <div *ngFor="let selected of schoolTable.selectedRows">
+                                    <span [textContent]="selected.item"></span>
                                 </div>
                             </div>
                         </div>
-                        <input type="text" class="form-control" name="search">
-                        <table-component [cols]="cols" [items]="schools" id="table"></table-component>
-                    </div>
-                </div>
-                <!-- END EXAMPLE TABLE PORTLET-->
-            </div>
+
+

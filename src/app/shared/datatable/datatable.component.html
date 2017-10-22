@@ -1,23 +1,54 @@
-<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of items">
-                <td>{{item.id}}</td>
-                <td> {{item.schoolName}}</td>
-                <td>{{item.address}}</td>
-                <td>{{item.email}}</td>
-                <td>{{item.phone}}</td>
-                <td>{{item.mobile}}</td>
-            </tr>
-            
-        </tbody>
-    </table>
+<div style="margin: auto; max-width: 1000px; margin-top:50px">
+    <data-table id="films-grid"
+        headerTitle="Films"
+        [items]="films"
+        [itemCount]="filmCount"
+        (reload)="reloadFilms($event)"
+
+        [limit]="8"
+        [sortBy]="'rating'"
+        [sortAsc]="false"
+        [selectColumn]="true"
+        [multiSelect]="true"
+        [indexColumn]="false"
+        [translations]="translations"
+        
+        >
+        <data-table-column
+            [property]="'title'"
+            [header]="'Title'"
+            [sortable]="true">
+        </data-table-column>
+        <data-table-column
+            [property]="'year'"
+            [header]="'Release year'"
+            [sortable]="true">
+        </data-table-column>
+        <data-table-column
+            [property]="'rating'"
+            [header]="'Rating'"
+            [sortable]="true"
+            [cellColors]="cellColor">
+        </data-table-column>
+        <data-table-column
+            [property]="'director'"
+            [header]="'Director'">
+        </data-table-column>
+        <data-table-column
+        header="Actions">
+        <template #dataTableHeader let-item="item">
+          <i>Actions</i>
+        </template>
+        <template #dataTableCell let-item="item">
+          <button (click)="carClicked(item)" class="btn btn-sm btn-default">Buy</button>
+        </template>
+      </data-table-column>
+
+    </data-table>
+    <div style="margin-top: 10px">
+        <b>Selected:</b>
+        <div *ngFor="let selected of filmsTable.selectedRows">
+            <span [textContent]="selected.item"></span>
+        </div>
+    </div>
+</div>

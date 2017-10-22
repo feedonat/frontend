@@ -1,36 +1,69 @@
-import { Component, OnInit } from '@angular/core';
-import { SchoolProfileService } from '../../../../Services/SchoolProfileService';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SchoolProfileService, schoolsData } from '../../../../Services/SchoolProfileService';
 import { SchoolProfile } from '../../../../Models/Models';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { element } from 'protractor';
+import { DataTable, DataTableTranslations, DataTableResource } from 'angular-2-data-table';
 
 @Component({
   selector: 'app-schools',
   templateUrl: './schools.component.html',
   styleUrls: ['./schools.component.css']
 })
-export class SchoolsComponent implements OnInit {
+export class SchoolsComponent {
 
-  public schools: any[]=[];
-  public cols: any[] = [{ "name": "Select?", "id": "select", "selectBox": true }, { "name": "school id", "id": "id"},
-  { "name": "School Name", "id": "schoolName"},
-  { "name": "Address", "id": "address"},
-  { "name": "Email", "id": "email"},
-  { "name": "Phone", "id": "phone"},
-  { "name": "Mobile", "id": "mobile"},
-  {"name":"logo", "id":"logo","sort":false,"image":true},
-  {"name":"Action", "id":"action","sort":false, "button":true}
- ];
-  constructor(public schoolService: SchoolProfileService, public router: Router) {
+  schoolResource = new DataTableResource(schoolsData);
+  schoolsData = [];
+  schoolCount = 0;
+
+
+  @ViewChild(DataTable) schoolTable;
+
+  constructor(public schoolprofileService: SchoolProfileService) {
+
+    this.getall();
+    this.schoolResource.count().then(count => this.schoolCount = count);
   }
-  ngOnInit() {
 
-    this.schoolService.getSchools().subscribe(schools => this.schools = schools,
+  reloadFilms(params) {
+
+
+
+    this.schoolResource.query(params).then(films => this.schoolsData = films);
+  }
+
+  cellColor(car) {
+    return 'rgb(255, 255,' + (155 + Math.floor(100 - ((car.rating - 8.7) / 1.3) * 100)) + ')';
+  };
+
+  // special params:
+  translations = <DataTableTranslations>{
+    indexColumn: 'Index column',
+    expandColumn: 'Expand column',
+    selectColumn: 'Select column',
+    paginationLimit: 'Max results',
+    paginationRange: 'Result range'
+  };
+
+  carClicked(item) {
+    console.log(item)
+  }
+
+  ngOnInit() {
+    this.getall();
+
+  }
+  getall() {
+    this.schoolprofileService.getSchools().subscribe(schools => this.schoolsData = schools,
       error => {
         Observable.throw(error);
       });
-    console.log(this.schools)
+    console.log(this.schoolsData)
+    console.log(schoolsData)
   }
-
+  schoolClicked(school) {
+    alert(school);
+  }
+  
 }

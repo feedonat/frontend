@@ -8,6 +8,7 @@ export class SchoolProfile {
     mobile :string;
     logo:any;
   
+
 // constructor(name:string,email:string,address:string,phone:string,mobile:string){
 
 //     this.schoolName=name;

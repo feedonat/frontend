@@ -15,10 +15,10 @@ import { SchoolProfileService } from '../../Services/SchoolProfileService';
 import { SchoolsComponent } from './school-profile/schools/schools.component';
 import { TableComponent } from '../../shared/table/table.component';
 import { OrderByPipe } from '../../shared/orderBy/OrderByPipe';
-import { DatatableComponent } from '../../shared/datatable/datatable.component';
 import { ImageUploadModule } from "angular2-image-upload";
 import { SafeHtml } from '../../shared/orderBy/safeHtml';
 import { UploadPhotoService } from '../../Services/file-uploadService';
+import { DataTableModule } from 'angular-2-data-table';
 
 @NgModule({
   imports: [
@@ -27,6 +27,7 @@ import { UploadPhotoService } from '../../Services/file-uploadService';
     HttpModule,
     RouterModule,
     FormsModule,
+    DataTableModule,
     ImageUploadModule.forRoot(),
 
   ],
@@ -42,7 +43,6 @@ import { UploadPhotoService } from '../../Services/file-uploadService';
     SchoolsComponent,
     TableComponent,
     OrderByPipe,
-    DatatableComponent,
     SafeHtml
 
   ],

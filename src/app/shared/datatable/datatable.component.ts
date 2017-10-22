@@ -1,15 +1,43 @@
-import { Component, OnInit, Input } from '@angular/core';
-
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { DataTable, DataTableTranslations, DataTableResource } from 'angular-2-data-table';
+import { films } from './datatable-data';
 @Component({
   selector: 'app-datatable',
   templateUrl: './datatable.component.html',
   styleUrls: ['./datatable.component.css']
 })
-export class DatatableComponent implements OnInit {
- @Input() public items: any[];
-  constructor() { }
 
-  ngOnInit() {
+export class DatatableComponent {
+
+  filmResource = new DataTableResource(films);
+  films = [];
+  filmCount = 0;
+
+  @ViewChild(DataTable) filmsTable;
+
+  constructor() {
+      this.filmResource.count().then(count => this.filmCount = count);
+  }
+
+  reloadFilms(params) {
+      this.filmResource.query(params).then(films => this.films = films);
+  }
+
+  cellColor(car) {
+      return 'rgb(255, 255,' + (155 + Math.floor(100 - ((car.rating - 8.7)/1.3)*100)) + ')';
+  };
+
+  // special params:
+  translations = <DataTableTranslations>{
+      indexColumn: 'Index column',
+      expandColumn: 'Expand column',
+      selectColumn: 'Select column',
+      paginationLimit: 'Max results',
+      paginationRange: 'Result range'
+  };
+
+  carClicked(item){
+      console.log(item)
   }
 
 }
