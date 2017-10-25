@@ -1,73 +1,8 @@
+<div style="margin: auto; max-width: 1000px; margin-top:50px">
+
+    <app-datatable [cols]="cols" [items]="schoolsData">
+
+    </app-datatable>
 
 
-                        <div style="margin: auto; max-width: 1000px; margin-top:50px">
-                            <data-table id="school-grid"
-                               
-                                [items]="schoolsData"
-                                [itemCount]="schoolCount"
-                                (reload)="reloadFilms($event)"
-                        
-                                [limit]="schoolsData.length"
-                                [sortBy]="'rating'"
-                                [sortAsc]="false"
-                                [selectColumn]="true"
-                                [multiSelect]="true"
-                                [indexColumn]="false"
-                                [translations]="translations"
-                                
-                                >
-                                <data-table-column
-                                    [property]="'id'"
-                                    [header]="'ID'"
-                                    [sortable]="true">
-                                </data-table-column>
-                                <data-table-column
-                                    [property]="'schoolName'"
-                                    [header]="'School Name'"
-                                    [sortable]="true">
-                                </data-table-column>
-                                <data-table-column
-                                    [property]="'address'"
-                                    [header]="'Address'"
-                                    [sortable]="true"
-                                    [cellColors]="cellColor">
-                                </data-table-column>
-                                <data-table-column
-                                    [property]="'email'"
-                                    [header]="'Email'">
-                                </data-table-column>
-
-                                <data-table-column
-                                [property]="'phone'"
-                                [header]="'Phone#'">
-                            </data-table-column>
-
-                            <data-table-column
-                            [property]="'mobile'"
-                            [header]="'Mobile#'">
-                        </data-table-column>
-                        <data-table-column
-                        [property]="'logo'"
-                        [header]="'Logo'">
-                    </data-table-column>
-
-                                <data-table-column
-                                header="Actions">
-                                <template #dataTableHeader let-item="item">
-                                  <i>Actions</i>
-                                </template>
-                                <template #dataTableCell let-item="item">
-                                  <button (click)="schoolClicked(item)" class="btn btn-sm btn-default">Buy</button>
-                                </template>
-                              </data-table-column>
-     
-                            </data-table>
-                            <div style="margin-top: 10px">
-                                <b>Selected:</b>
-                                <div *ngFor="let selected of schoolTable.selectedRows">
-                                    <span [textContent]="selected.item"></span>
-                                </div>
-                            </div>
-                        </div>
-
-
+</div>

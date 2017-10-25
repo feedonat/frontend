@@ -16,11 +16,7 @@ import { SchoolProfile } from '../Models/Models';
 
 @Injectable()
 export class SchoolProfileService  {
-
-  schools:any[];
   constructor(private http: Http) { 
-
-   this.loadschools();
   }
  
   //create new school 
@@ -34,23 +30,14 @@ export class SchoolProfileService  {
     
   }
 
-getSchools() : Observable<SchoolProfile[]> { {
-    console.log("calling getschools service ");
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.get('http://localhost:8080/api/school/all').map((res: Response) => res.json())
-    .catch((error:Response)=>Observable.throw(error.json));
-  
-    
+  public getall(): Observable<SchoolProfile[]> {
+    return this.executeRestForUrl("http://localhost:8080/api/school/all");
+  }
+
+  public executeRestForUrl(url: string): Observable<SchoolProfile[]> {
+    console.log("getting data from url: " + url);
+    var responseData =  this.http.get(url)
+      .map((res: Response) => <SchoolProfile[]>res.json());
+      return responseData;
   }
 }
-
- loadschools(){
-  this.getSchools().subscribe(schools => this.schools = schools,
-    error => {
-      Observable.throw(error);
-    });
-  console.log("inside service constracor"+ this.schools)
-}
-}
-export var schoolsData = this.schools;

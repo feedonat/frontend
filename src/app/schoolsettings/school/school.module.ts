@@ -18,7 +18,8 @@ import { OrderByPipe } from '../../shared/orderBy/OrderByPipe';
 import { ImageUploadModule } from "angular2-image-upload";
 import { SafeHtml } from '../../shared/orderBy/safeHtml';
 import { UploadPhotoService } from '../../Services/file-uploadService';
-import { DataTableModule } from 'angular-2-data-table';
+import { DatatableComponent } from '../../shared/datatable/datatable.component';
+import { DataTableModule } from 'angular-4-data-table';
 
 @NgModule({
   imports: [
@@ -27,8 +28,8 @@ import { DataTableModule } from 'angular-2-data-table';
     HttpModule,
     RouterModule,
     FormsModule,
-    DataTableModule,
     ImageUploadModule.forRoot(),
+    DataTableModule
 
   ],
   declarations: [
@@ -43,6 +44,7 @@ import { DataTableModule } from 'angular-2-data-table';
     SchoolsComponent,
     TableComponent,
     OrderByPipe,
+    DatatableComponent,
     SafeHtml
 
   ],

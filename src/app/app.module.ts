@@ -9,8 +9,7 @@ import { AppRouting } from './app-routing';
 import { WelcomeComponent } from './shared/welcome/welcome.component';
 import {Router, RouterModule} from "@angular/router";
 import { FooterComponent } from './shared/footer/footer.component';
-import { DataTableModule } from 'angular-2-data-table';
-import { DatatableComponent } from './shared/datatable/datatable.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +17,7 @@ import { DatatableComponent } from './shared/datatable/datatable.component';
     HeaderComponent,
     WelcomeComponent,
     FooterComponent,
-    DatatableComponent
+    
     
     
   ],
@@ -27,8 +26,8 @@ import { DatatableComponent } from './shared/datatable/datatable.component';
     HttpModule,
     RouterModule,
     AppRouting,
-    SchoolModule,
-    DataTableModule
+    SchoolModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

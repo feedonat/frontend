@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { DataTable, DataTableTranslations, DataTableResource } from 'angular-2-data-table';
-import { films } from './datatable-data';
+import { DataTable, DataTableTranslations, DataTableResource } from 'angular-4-data-table';
+// import { films } from './datatable-data';
 @Component({
   selector: 'app-datatable',
   templateUrl: './datatable.component.html',
@@ -9,18 +9,32 @@ import { films } from './datatable-data';
 
 export class DatatableComponent {
 
-  filmResource = new DataTableResource(films);
-  films = [];
-  filmCount = 0;
+//   filmResource = new DataTableResource(films);
+//   films = [];
+//   filmCount = 0;
 
-  @ViewChild(DataTable) filmsTable;
+ 
+  @Input() items:any[];
+  @Input() cols:any[];
+  @Input() itemCount:number;
+ // (reload)="reloadFilms($event)"
+ @Input() limit:number=5;
+ @Input() sortBy:string;
+ @Input()selectColumn:boolean=true;
+ @Input() multiSelect:boolean = true;
+ @Input() indexColumn:boolean=true;
+ //@Input() translations="translations";
+
+ filmResource = new DataTableResource(this.items);
+
+ @ViewChild(DataTable) dataTable;
 
   constructor() {
-      this.filmResource.count().then(count => this.filmCount = count);
+      this.filmResource.count().then(count => this.itemCount = count);
   }
 
   reloadFilms(params) {
-      this.filmResource.query(params).then(films => this.films = films);
+      this.filmResource.query(params).then(films => this.items = films);
   }
 
   cellColor(car) {
