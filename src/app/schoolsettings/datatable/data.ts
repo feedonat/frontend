@@ -14,4 +14,3 @@ export var films = [
     { title: 'Forest Gump', year: 1994, rating: 8.7, director: 'Stephen Spielberg', description: 'Forrest Gump, while not intelligent, has accidentally been present at many historic moments, but his true love, Jenny Curran, eludes him.'},
     { title: 'Inception', year: 2010, rating: 8.7, director: 'Christopher Nolan', description: 'A thief who steals corporate secrets through use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.'},
 ];
-

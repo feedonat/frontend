@@ -4,6 +4,7 @@ import { SchoolProfile } from '../../../Models/Models';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
+import { SchoolService } from './schools/school-service';
 
 import {
   RequestOptions,
@@ -24,14 +25,14 @@ export class SchoolProfileComponent {
   public debug_size_before: string[] = [];
   public debug_size_after: string[] = [];
 
-  constructor(public route :Router,  public schoolprofileService: SchoolProfileService, public changeDetectorRef: ChangeDetectorRef) { }
+  constructor(public route :Router,  public schoolservice: SchoolService, public changeDetectorRef: ChangeDetectorRef) { }
 
   createSchool( school: SchoolProfile) {
 school.logo = this.profile.logo;
 console.log(school.logo);
 console.log(school);
 
-    this.schoolprofileService.createSchool(school).subscribe(
+    this.schoolservice.createSchool(school).subscribe(
       data => {
         return true;
       },

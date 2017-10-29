@@ -1,58 +1,36 @@
-<!-- <div style="margin: auto; max-width: 1000px; margin-top:50px">
-
-    <app-datatable [cols]="cols" [resource]="schoolsData">
-    </app-datatable>
-</div> -->
  <div style="margin: auto; max-width: 1000px; margin-top:50px">
-        <button (click)="addNew()" class="btn btn-sm btn-info"><span class=" glyphicon glyphicon-plus">Add School</span></button>
-    
-    <data-table id="films-grid"
- 
-      [items]="schools"
-      [itemCount]="dataCount"
+  <data-table id="films-grid"
+      headerTitle="Films"
+      [items]="resource"
+      [itemCount]="count"
       (reload)="reloadFilms($event)"
 
       [limit]="8"
       [sortBy]="'rating'"
       [sortAsc]="false"
-      [indexColumn]="false"
+
       [selectColumn]="true"
+      [multiSelect]="false"
       [substituteRows]="false"
-      [multiSelect]="true"
-      [selectColumn]="true"
+      [expandableRows]="true"
       [translations]="translations"
       [indexColumnHeader]="'#'"
       [selectOnRowClick]="true"
-   
       >
       <template #dataTableExpand let-item="item">
           <div [textContent]="item.description" style="padding: 5px; color: gray"></div>
       </template>
       <data-table-column *ngFor="let col of cols"
-          [property]="col.property"
-          [header]="col.header"
-          [resizable]="col.resize"
+          [property]="'col.property'"
+          [header]="'col.header'"
           [sortable]="col.sortable">
-          
       </data-table-column>
-      <data-table-column
-      header="Actions">
-      <template #dataTableHeader let-item="item">
-        <i>Actions</i>
-      </template>
-      <template #dataTableCell let-item="item">
-        <button (click)="schoolCliked(item)" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
-      </template>
-    </data-table-column>
+
   </data-table>
-  <div>
-    <div>
-        <b>Selected:</b>
-        <span [textContent]="schoolTable.selectedRows.length"></span>
-    </div>
-    <div *ngFor="let selected of schoolTable.selectedRows">
-        <span [textContent]="selected.item.schoolName"></span>
-    </div>
+  <div style="margin-top: 10px">
+      <b>Selected:</b>
+      <span *ngIf="filmsTable.selectedRow == null"><i>No item selected</i></span>
+      <span [textContent]="filmsTable.selectedRow && filmsTable.selectedRow.item.title"></span>
   </div>
 </div>
 

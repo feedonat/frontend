@@ -18,8 +18,10 @@ import { OrderByPipe } from '../../shared/orderBy/OrderByPipe';
 import { ImageUploadModule } from "angular2-image-upload";
 import { SafeHtml } from '../../shared/orderBy/safeHtml';
 import { UploadPhotoService } from '../../Services/file-uploadService';
-import { DatatableComponent } from '../../shared/datatable/datatable.component';
+import { DatatableComponent } from '../../schoolsettings/datatable/datatable.component';
 import { DataTableModule } from 'angular-4-data-table';
+import { SchoolResolver } from './school-profile/schools/school-resolver';
+import { SchoolService } from './school-profile/schools/school-service';
 
 @NgModule({
   imports: [
@@ -49,8 +51,9 @@ import { DataTableModule } from 'angular-4-data-table';
 
   ],
 providers: [
-  SchoolProfileService,
- UploadPhotoService
+   SchoolService,
+   UploadPhotoService,
+   SchoolResolver
   ]
 
 })
